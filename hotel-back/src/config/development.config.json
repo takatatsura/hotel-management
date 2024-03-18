@@ -1,0 +1,46 @@
+{
+    "app": {
+        "name": "api.hotel_back.local",
+        "version": "1.0.0"
+    },
+    "jwt": {
+        "secret": "T=_afU=bJq[p%Z6S",
+        "audience": "users.api.hotel_back.local",
+        "issuer": "api.hotel_back.local",
+        "jwtid": "jwt.api.hotel_back.local",
+        "subject": "hotel_back.local"
+    },
+    "server": {
+        "port": 1338,
+        "name": "api.hotel_back.local",
+        "defaultVersion": "1.0.0",
+        "acceptable": ["application/json"],
+        "throttleRate": 50,
+        "throttleBurst": 100
+    },
+    "db": {
+        "name": "hotel_back",
+        "username": "root",
+        "password": "123698745",
+        "config": {
+            "host": "localhost",
+            "port": 3306,
+            "dialect": "mysql",
+            "pool": {
+                "max": 10,
+                "min": 0,
+                "idle": 10000
+            },
+            "define": {
+                "timestamps": false
+            }
+        }
+    },
+    "logging": {
+        "name": "hotel_back-log",
+        "dir": "logs/"
+    },
+    "key": {
+        "path": "keys/server.key"
+    }
+}
