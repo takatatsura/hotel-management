@@ -31,6 +31,7 @@ fs.readdirSync(__dirname)
     })
     .forEach((file) => {
         const model = sequelize.import(path.join(__dirname, file));
+        // Sequelize keeps changing the table name to the plural form
         if (model.tableName == 'room_statuses') {
             model.tableName = 'room_status';
         }

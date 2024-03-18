@@ -227,7 +227,7 @@ routes.push({
                                 return models.bookings
                                     .create(form)
                                     .then((data) => {
-                                        // map rooms and create one by one
+                                        // Map rooms and create one by one
                                         return Promise.map(
                                             form.rooms,
                                             (room) => {
@@ -368,7 +368,7 @@ routes.push({
                                         },
                                     })
                                     .then((data) => {
-                                        // update record
+                                        // Update record
                                         return data
                                             .update(form)
                                             .then((updated) => {
@@ -387,7 +387,7 @@ routes.push({
                                                         }
                                                     )
                                                     .then(() => {
-                                                        // map rooms and create one by one
+                                                        // Map rooms and create one by one
                                                         return Promise.map(
                                                             form.rooms,
                                                             (room) => {
