@@ -1,0 +1,116 @@
+<h1 class="page-title">Booking List</h1>
+<hr />
+<div class="row grid-margin">
+  <div class="col">
+    <form>
+      <input
+        #search
+        (keyup)="(0)"
+        class="form-control"
+        type="text"
+        placeholder="Search"
+      />
+    </form>
+  </div>
+  <div class="col-sm-4 d-flex justify-content-end">
+    <div class="btn-group float-right">
+      <a class="btn btn-success" [routerLink]="['create']">
+        <i class="fa fa-plus-circle"></i> New Booking
+      </a>
+    </div>
+    <button class="btn btn-info" (click)="changeFormat()">
+      Change date format
+    </button>
+  </div>
+</div>
+<div class="row grid-margin">
+  <div class="col-lg-12 grid-margin grid-margin-lg-0">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Bookings</h2>
+        <table class="table table-hover table-responsive-sm">
+          <thead class="thead-light">
+            <tr class="">
+              <th>Details</th>
+              <th>Guest</th>
+              <th>Checkin</th>
+              <th>Checkout</th>
+              <th>Confirmed</th>
+              <th width="1%">#</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="bookings$.isLoading == true">
+            <tr>
+              <th colspan="6" class="text-center">
+                <loading-spinner></loading-spinner>
+              </th>
+            </tr>
+          </tbody>
+          <tbody
+            *ngIf="bookings$.data.length > 0 && bookings$.isLoading == false"
+          >
+            <tr
+              *ngFor="
+                let booking of bookings$.data | searchFilter : search.value
+              "
+            >
+              <td scope="row">
+                <a
+                  [routerLink]="['view', booking.uid]"
+                  title="View Booking Details"
+                >
+                  <i class="fa fa-file-text-o"></i>
+                </a>
+              </td>
+              <td>
+                <a
+                  [routerLink]="['/guests/view', booking.guest.uid]"
+                  title="View Guest Details"
+                  class="btn"
+                >
+                  {{ booking.guest.first_name }} {{ booking.guest.last_name }}
+                </a>
+              </td>
+              <td>
+                {{ booking.checkin | date : dateFormat }}<br />
+                <small>{{ booking.checkin | date : "mediumTime" }}</small>
+              </td>
+              <td>{{ booking.checkout | date : dateFormat }}<br /></td>
+              <td class="text-center">
+                <span
+                  class="badge capitalized-text"
+                  [ngClass]="{
+                    'badge-danger': booking.confirmed == false,
+                    'badge-success': booking.confirmed == true
+                  }"
+                  >{{ booking.confirmed ? "Yes" : "No" }}</span
+                >
+              </td>
+              <td>
+                <button
+                  *ngIf="!booking.checked_in"
+                  (click)="openModal('checkIn', booking.uid)"
+                >
+                  <i class="fa fa-check"></i>
+                </button>
+                <button
+                  *ngIf="booking.checked_in && !booking.checked_out"
+                  (click)="openModal('checkOut', booking.uid)"
+                >
+                  <i class="fa fa-times"></i>
+                </button>
+                <a
+                  [routerLink]="['edit', booking.uid]"
+                  title="Edit Booking"
+                  class="btn"
+                >
+                  <i class="fa fa-pencil"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

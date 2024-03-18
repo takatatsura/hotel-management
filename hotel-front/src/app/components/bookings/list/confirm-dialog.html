@@ -1,0 +1,7 @@
+<div mat-dialog-content>
+  <p>Confirm {{data.mode}}.</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="confirm()" cdkFocusInitial>Ok</button>
+</div>

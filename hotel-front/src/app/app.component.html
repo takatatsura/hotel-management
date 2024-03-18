@@ -1,0 +1,86 @@
+<nav class="navbar navbar-primary col-lg-12 col-12 fixed-top d-flex flex-row">
+  <div class="text-center navbar-brand-wrapper">
+    <a class="navbar-brand brand-logo"
+      >{{ name }}
+      <i class="fa fa-hotel"></i>
+    </a>
+    <a class="navbar-brand brand-logo-mini">
+      <i class="fa fa-hotel"></i>
+    </a>
+  </div>
+  <div class="navbar-menu-wrapper d-flex align-items-center">
+    <button
+      class="navbar-toggler navbar-toggler align-self-center mr-2"
+      type="button"
+      data-toggle="minimize"
+      (click)="openSidebar = !openSidebar"
+    >
+      <span class="fa fa-bars"></span>
+    </button>
+    <button
+      class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
+      type="button"
+      data-toggle="offcanvas"
+      (click)="openSidebar = !openSidebar"
+    >
+      <span class="fa fa-bars"></span>
+    </button>
+  </div>
+</nav>
+
+<div class="container-fluid page-body-wrapper">
+  <div
+    class="row row-offcanvas row-offcanvas-right"
+    [ngClass]="{ active: openSidebar }"
+  >
+    <nav class="sidebar sidebar-offcanvas">
+      <ul class="nav">
+        <li class="nav-item nav-category">
+          <span class="nav-link">Menu</span>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['']" (click)="openSidebar = false">
+            <span class="menu-title">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['bookings']"
+            (click)="openSidebar = false"
+          >
+            <span class="menu-title">Booking</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['guests']"
+            (click)="openSidebar = false"
+          >
+            <span class="menu-title">Guest</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['rooms']"
+            (click)="openSidebar = false"
+          >
+            <span class="menu-title">Rooms</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+    <footer class="footer">
+      <div class="container-fluid clearfix">
+        <span class="float-right">
+          <a href="#">{{ name }}</a>
+        </span>
+      </div>
+    </footer>
+  </div>
+</div>
